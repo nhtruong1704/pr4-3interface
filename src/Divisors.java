@@ -15,40 +15,13 @@ public class Divisors implements Result {
     }
 
     public Divisors() {
+
     }
 
     @Override
     public String getResult() {
         StringBuilder result = new StringBuilder();
-
-        if (numbers != null) {
-            for (int num : numbers) {
-                result.append("Divisors of ").append(num).append(": ");
-                for (int i = 1; i <= num; i++) {
-                    if (num % i == 0) {
-                        result.append(i).append(" ");
-                    }
-                }
-                result.append("\n");
-            }
-        } else {
-            for (int i = m; i <= n; i++) {
-                result.append("Divisors of ").append(i).append(": ");
-                for (int j = 1; j <= i; j++) {
-                    if (i % j == 0) {
-                        result.append(j).append(" ");
-                    }
-                }
-                result.append("\n");
-            }
-        }
-
-        return result.toString();
-    }
-
-    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Divisors divisors = new Divisors();
 
         while (true) {
             System.out.println("Select an option:");
@@ -58,6 +31,7 @@ public class Divisors implements Result {
             System.out.println("4. Exit");
 
             int choice = scanner.nextInt();
+
 
             switch (choice) {
                 case 1:
@@ -71,22 +45,19 @@ public class Divisors implements Result {
                         intNumbers[i] = Integer.parseInt(numbers[i]);
                     }
 
-                    divisors = new Divisors(intNumbers);
-                    System.out.println(divisors.getResult());
+                    this.numbers = intNumbers;
                     break;
 
                 case 2:
                     System.out.print("Enter the length of the array: ");
                     int length = scanner.nextInt();
-
                     int[] intArray = new int[length];
-                    System.out.print("Enter the numbers separated by spaces: ");
+                    System.out.print("Enter the numbers: ");
                     for (int i = 0; i < length; i++) {
                         intArray[i] = scanner.nextInt();
                     }
 
-                    divisors = new Divisors(intArray);
-                    System.out.println(divisors.getResult());
+                    this.numbers = intArray;
                     break;
 
                 case 3:
@@ -95,8 +66,8 @@ public class Divisors implements Result {
                     System.out.print("Enter the value of n: ");
                     int n = scanner.nextInt();
 
-                    divisors = new Divisors(m, n);
-                    System.out.println(divisors.getResult());
+                    this.m = m;
+                    this.n = n;
                     break;
 
                 case 4:
@@ -106,9 +77,31 @@ public class Divisors implements Result {
                     System.out.println("Invalid choice, please try again.");
                     break;
             }
+
+            if (numbers != null) {
+                for (int num : numbers) {
+                    result.append("Divisors of ").append(num).append(": ");
+                    for (int i = 1; i <= num; i++) {
+                        if (num % i == 0) {
+                            result.append(i).append(" ");
+                        }
+                    }
+                    result.append("\n");
+                }
+            } else {
+                for (int i = m; i <= n; i++) {
+                    result.append("Divisors of ").append(i).append(": ");
+                    for (int j = 1; j <= i; j++) {
+                        if (i % j == 0) {
+                            result.append(j).append(" ");
+                        }
+                    }
+                    result.append("\n");
+                }
+            }
+            System.out.println(result.toString());
+            result.setLength(0);
         }
     }
-    public interface Result {
-        String getResult();
-    }
+
 }
